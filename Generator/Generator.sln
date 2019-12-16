@@ -1,0 +1,65 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Gui", "Generator.Gui\Generator.Gui.csproj", "{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGenerator", "SqlGenerator\SqlGenerator.csproj", "{00337B7B-47D9-4A66-8702-D1AE9A33A631}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGenerator.Tests", "SqlGenerator.Tests\SqlGenerator.Tests.csproj", "{36C5E25F-4DF2-4248-A63C-3D4402107F10}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6699A7B8-5FE3-47E0-A03E-A12AB58AD462}"
+	ProjectSection(SolutionItems) = preProject
+		Generator.vsmdi = Generator.vsmdi
+		LocalTestRun.testrunconfig = LocalTestRun.testrunconfig
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Controls", "Generator.Controls\Generator.Controls.csproj", "{312C1B0D-F233-43D7-9596-9728EF4DB790}"
+EndProject
+Global
+	GlobalSection(TeamFoundationVersionControl) = preSolution
+		SccNumberOfProjects = 5
+		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
+		SccTeamFoundationServer = http://192.168.8.23:8080/
+		SccLocalPath0 = .
+		SccProjectUniqueName1 = Generator.Controls\\Generator.Controls.csproj
+		SccProjectName1 = Generator.Controls
+		SccLocalPath1 = Generator.Controls
+		SccProjectUniqueName2 = Generator.Gui\\Generator.Gui.csproj
+		SccProjectName2 = Generator.Gui
+		SccLocalPath2 = Generator.Gui
+		SccProjectUniqueName3 = SqlGenerator.Tests\\SqlGenerator.Tests.csproj
+		SccProjectName3 = SqlGenerator.Tests
+		SccLocalPath3 = SqlGenerator.Tests
+		SccProjectUniqueName4 = SqlGenerator\\SqlGenerator.csproj
+		SccProjectName4 = SqlGenerator
+		SccLocalPath4 = SqlGenerator
+	EndGlobalSection
+	GlobalSection(TestCaseManagementSettings) = postSolution
+		CategoryFile = Generator.vsmdi
+	EndGlobalSection
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Release|Any CPU.Build.0 = Release|Any CPU
+		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
