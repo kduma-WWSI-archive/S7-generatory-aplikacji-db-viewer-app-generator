@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace SqlGenerator
+﻿namespace Generator.PlugIn.SqlGenerator
 {
     public class Column
     {

@@ -1,6 +1,4 @@
-using System;
-
-namespace SqlGenerator
+namespace Generator.PlugIn.SqlGenerator
 {
     public class KeyPair
     {
@@ -14,6 +12,7 @@ namespace SqlGenerator
 
         public Table Table { get; private set; }
         public Table ForeignTable { get; private set; }
+
         public string ForeignKey { get; private set; }
         public string Key { get; private set; }
     }

@@ -3,8 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Gui", "Generator.Gui\Generator.Gui.csproj", "{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGenerator", "SqlGenerator\SqlGenerator.csproj", "{00337B7B-47D9-4A66-8702-D1AE9A33A631}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SqlGenerator.Tests", "SqlGenerator.Tests\SqlGenerator.Tests.csproj", "{36C5E25F-4DF2-4248-A63C-3D4402107F10}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{6699A7B8-5FE3-47E0-A03E-A12AB58AD462}"
@@ -15,9 +13,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.Controls", "Generator.Controls\Generator.Controls.csproj", "{312C1B0D-F233-43D7-9596-9728EF4DB790}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.PlugIn", "Generator.PlugIn\Generator.PlugIn.csproj", "{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Generator.PlugIn.BaseSqlGenerator", "Generator.PlugIn.BaseSqlGenerator\Generator.PlugIn.BaseSqlGenerator.csproj", "{25BBE8B6-C7F3-4467-A13F-A673494B1C66}"
+EndProject
 Global
 	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 5
+		SccNumberOfProjects = 6
 		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
 		SccTeamFoundationServer = http://192.168.8.23:8080/
 		SccLocalPath0 = .
@@ -30,9 +32,12 @@ Global
 		SccProjectUniqueName3 = SqlGenerator.Tests\\SqlGenerator.Tests.csproj
 		SccProjectName3 = SqlGenerator.Tests
 		SccLocalPath3 = SqlGenerator.Tests
-		SccProjectUniqueName4 = SqlGenerator\\SqlGenerator.csproj
-		SccProjectName4 = SqlGenerator
-		SccLocalPath4 = SqlGenerator
+		SccProjectUniqueName4 = Generator.PlugIn\\Generator.PlugIn.csproj
+		SccProjectName4 = Generator.PlugIn
+		SccLocalPath4 = Generator.PlugIn
+		SccProjectUniqueName5 = Generator.PlugIn.BaseSqlGenerator\\Generator.PlugIn.BaseSqlGenerator.csproj
+		SccProjectName5 = Generator.PlugIn.BaseSqlGenerator
+		SccLocalPath5 = Generator.PlugIn.BaseSqlGenerator
 	EndGlobalSection
 	GlobalSection(TestCaseManagementSettings) = postSolution
 		CategoryFile = Generator.vsmdi
@@ -46,10 +51,6 @@ Global
 		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E48B40E9-BFE2-4DCC-8F2F-FC726FB3CB51}.Release|Any CPU.Build.0 = Release|Any CPU
-		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{00337B7B-47D9-4A66-8702-D1AE9A33A631}.Release|Any CPU.Build.0 = Release|Any CPU
 		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{36C5E25F-4DF2-4248-A63C-3D4402107F10}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -58,6 +59,14 @@ Global
 		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{312C1B0D-F233-43D7-9596-9728EF4DB790}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{25BBE8B6-C7F3-4467-A13F-A673494B1C66}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{25BBE8B6-C7F3-4467-A13F-A673494B1C66}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{25BBE8B6-C7F3-4467-A13F-A673494B1C66}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{25BBE8B6-C7F3-4467-A13F-A673494B1C66}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

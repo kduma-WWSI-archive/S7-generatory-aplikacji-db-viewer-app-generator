@@ -52,6 +52,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AboutBox.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="AboutBox.Designer.cs">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+    </Compile>
     <Compile Include="ExportApp.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -66,6 +72,10 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="AboutBox.resx">
+      <DependentUpon>AboutBox.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
     <EmbeddedResource Include="ExportApp.resx">
       <DependentUpon>ExportApp.cs</DependentUpon>
       <SubType>Designer</SubType>
@@ -97,9 +107,14 @@
       <Project>{312C1B0D-F233-43D7-9596-9728EF4DB790}</Project>
       <Name>Generator.Controls</Name>
     </ProjectReference>
-    <ProjectReference Include="..\SqlGenerator\SqlGenerator.csproj">
-      <Project>{00337B7B-47D9-4A66-8702-D1AE9A33A631}</Project>
-      <Name>SqlGenerator</Name>
+    <ProjectReference Include="..\Generator.PlugIn.BaseSqlGenerator\Generator.PlugIn.BaseSqlGenerator.csproj">
+      <Project>{25BBE8B6-C7F3-4467-A13F-A673494B1C66}</Project>
+      <Name>Generator.PlugIn.BaseSqlGenerator</Name>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Generator.PlugIn\Generator.PlugIn.csproj">
+      <Project>{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}</Project>
+      <Name>Generator.PlugIn</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

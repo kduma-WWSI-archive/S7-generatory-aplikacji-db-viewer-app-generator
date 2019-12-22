@@ -1,36 +1,26 @@
-using System;
+﻿using System;
 using System.Collections.ObjectModel;
 using System.Linq;
-using Generator.PlugIn;
 using Generator.PlugIn.SqlGenerator;
 
-namespace SqlGenerator
+namespace Generator.PlugIn.BaseSqlGenerator
 {
-    public class Generator : ISqlGenerator
+    [Plugin(Name = "Basic SQL Generator")]
+    [CompanyInfo(Name = "Krystian Duma", Url = "https://duma.dev/")]
+    public class SqlGeneratorPlugin : ISqlGenerator
     {
-        public Generator()
+        #region ISqlGenerator Members
+
+        public string GetSql(Collection<Table> tables, Collection<Column> columns, Collection<KeyPair> keyPairs)
         {
-            KeyPairs = new Collection<KeyPair>();
-            Columns = new Collection<Column>();
-            Tables = new Collection<Table>();
-        }
-
-        public Collection<Table> Tables { get; private set; }
-
-        public Collection<Column> Columns { get; private set; }
-
-        public Collection<KeyPair> KeyPairs { get; private set; }
-
-        public override string ToString()
-        {
-            var col = string.Join(", ", Columns.Select((column => column.ToString())).ToArray());
-            var grp = Columns.Count(column => !string.IsNullOrEmpty(column.Agregate)) != 0 && KeyPairs.Count != 0
-                ? string.Join(", ", Columns.Where(column => string.IsNullOrEmpty(column.Agregate)).Select(table => table.ToString()).ToArray())
+            var col = string.Join(", ", columns.Select((column => column.ToString())).ToArray());
+            var grp = columns.Count(column => !string.IsNullOrEmpty(column.Agregate)) != 0 && keyPairs.Count != 0
+                ? string.Join(", ", columns.Where(column => string.IsNullOrEmpty(column.Agregate)).Select(table => table.ToString()).ToArray())
                 : "";
 
             var joi = "";
             var used = new Collection<string>();
-            foreach (var pair in KeyPairs)
+            foreach (var pair in keyPairs)
             {
                 if (joi == "")
                 {
@@ -44,7 +34,7 @@ namespace SqlGenerator
                 used.Add(pair.ForeignTable.Name);
             }
 
-            var tab = string.Join(", ", Tables.Where(table => !used.Contains(table.Name)).Select((table => table.ToString())).ToArray());
+            var tab = string.Join(", ", tables.Where(table => !used.Contains(table.Name)).Select((table => table.ToString())).ToArray());
 
 
             if (joi != "" && tab != "")
@@ -63,5 +53,7 @@ namespace SqlGenerator
 
             return string.Format("SELECT {0} FROM {1}{2}", col, joi, grp);
         }
+
+        #endregion
     }
 }

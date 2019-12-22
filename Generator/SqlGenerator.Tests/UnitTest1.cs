@@ -1,7 +1,5 @@
-﻿using System;
-using System.Text;
-using System.Collections.Generic;
-using System.Linq;
+﻿using System.Collections.ObjectModel;
+using Generator.PlugIn.SqlGenerator;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 namespace SqlGenerator.Tests
@@ -12,12 +10,10 @@ namespace SqlGenerator.Tests
     [TestClass]
     public class UnitTest1
     {
-        public UnitTest1()
-        {
-            //
-            // TODO: Add constructor logic here
-            //
-        }
+
+        private Collection<Table> _tables;
+        private Collection<Column> _columns;
+        private Collection<KeyPair> _keyPairs;
 
         private TestContext testContextInstance;
 
@@ -48,24 +44,26 @@ namespace SqlGenerator.Tests
         // Use ClassCleanup to run code after all tests in a class have run
         // [ClassCleanup()]
         // public static void MyClassCleanup() { }
-        //
+        
         // Use TestInitialize to run code before running each test 
-        // [TestInitialize()]
-        // public void MyTestInitialize() { }
-        //
-        // Use TestCleanup to run code after each test has run
-        // [TestCleanup()]
-        // public void MyTestCleanup() { }
-        //
-        #endregion
-
-        [TestMethod]
-        public void TestMethod1()
+        [TestInitialize()]
+        public void MyTestInitialize()
         {
-            //
-            // TODO: Add test logic	here
-            //
+            _tables = new Collection<Table>();
+            _columns = new Collection<Column>();
+            _keyPairs = new Collection<KeyPair>();
         }
+        
+        // Use TestCleanup to run code after each test has run
+        [TestCleanup()]
+        public void MyTestCleanup()
+        {
+            _tables = null;
+            _columns = null;
+            _keyPairs = null;
+        }
+        
+        #endregion
 
         [TestMethod]
         public void Test1()
@@ -74,14 +72,14 @@ namespace SqlGenerator.Tests
             var c1 = new Column("name", t1, null);
             var c2 = new Column("city", t1, null);
 
-            var g = new Generator();
-            g.Columns.Add(c1);
-            g.Columns.Add(c2);
-            g.Tables.Add(t1);
+            var g = new Generator.PlugIn.BaseSqlGenerator.SqlGeneratorPlugin();
+            _columns.Add(c1);
+            _columns.Add(c2);
+            _tables.Add(t1);
 
             Assert.AreEqual(
                 "SELECT table_1.name, table_1.city FROM table_1",
-                g.ToString()
+                g.GetSql(_tables, _columns, _keyPairs)
             );
         }
 
@@ -94,17 +92,17 @@ namespace SqlGenerator.Tests
             var c2 = new Column("city", t1, null);
             var c3 = new Column("family", t2, null);
 
-            var g = new Generator();
-            g.Columns.Add(c1);
-            g.Columns.Add(c2);
-            g.Columns.Add(c3);
-            g.Tables.Add(t1);
-            g.Tables.Add(t2);
+            var g = new Generator.PlugIn.BaseSqlGenerator.SqlGeneratorPlugin();
+            _columns.Add(c1);
+            _columns.Add(c2);
+            _columns.Add(c3);
+            _tables.Add(t1);
+            _tables.Add(t2);
 
             Assert.AreEqual(
                 "SELECT table_1.name, table_1.city, table_2.family FROM table_1, table_2",
-                g.ToString()
-                );
+                g.GetSql(_tables, _columns, _keyPairs)
+            );
         }
 
         [TestMethod]
@@ -117,17 +115,17 @@ namespace SqlGenerator.Tests
             var c3 = new Column("family_name", t2, null);
             var k1 = new KeyPair(t2, "id", t1, "family_id");
 
-            var g = new Generator();
-            g.Columns.Add(c1);
-            g.Columns.Add(c2);
-            g.Columns.Add(c3);
-            g.Tables.Add(t1);
-            g.Tables.Add(t2);
-            g.KeyPairs.Add(k1);
+            var g = new Generator.PlugIn.BaseSqlGenerator.SqlGeneratorPlugin();
+            _columns.Add(c1);
+            _columns.Add(c2);
+            _columns.Add(c3);
+            _tables.Add(t1);
+            _tables.Add(t2);
+            _keyPairs.Add(k1);
 
             Assert.AreEqual(
                 "SELECT table_1.name, table_1.city, table_2.family_name FROM table_2 JOIN table_1 ON table_2.family_id = table_1.id",
-                g.ToString()
+                g.GetSql(_tables, _columns, _keyPairs)
             );
         }
 
@@ -138,14 +136,14 @@ namespace SqlGenerator.Tests
             var c1 = new Column("name", t1, null);
             var c2 = new Column("price", t1, "SUM");
 
-            var g = new Generator();
-            g.Columns.Add(c1);
-            g.Columns.Add(c2);
-            g.Tables.Add(t1);
+            var g = new Generator.PlugIn.BaseSqlGenerator.SqlGeneratorPlugin();
+            _columns.Add(c1);
+            _columns.Add(c2);
+            _tables.Add(t1);
 
             Assert.AreEqual(
                 "SELECT table_1.name, SUM(table_1.price) FROM table_1",
-                g.ToString()
+                g.GetSql(_tables, _columns, _keyPairs)
             );
         }
 
@@ -158,16 +156,16 @@ namespace SqlGenerator.Tests
             var cost = new Column("price", products, "SUM");
             var k1 = new KeyPair(products, "id", orders, "order_id");
 
-            var g = new Generator();
-            g.Columns.Add(number);
-            g.Columns.Add(cost);
-            g.Tables.Add(orders);
-            g.Tables.Add(products);
-            g.KeyPairs.Add(k1);
+            var g = new Generator.PlugIn.BaseSqlGenerator.SqlGeneratorPlugin();
+            _columns.Add(number);
+            _columns.Add(cost);
+            _tables.Add(orders);
+            _tables.Add(products);
+            _keyPairs.Add(k1);
 
             Assert.AreEqual(
                 "SELECT orders.number, SUM(products.price) FROM products JOIN orders ON products.order_id = orders.id GROUP BY orders.number",
-                g.ToString()
+                g.GetSql(_tables, _columns, _keyPairs)
             );
         }
     }

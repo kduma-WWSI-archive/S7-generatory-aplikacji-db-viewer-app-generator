@@ -10,16 +10,19 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Windows.Forms;
 using Generator.Controls;
-using SqlGenerator;
+using Generator.PlugIn;
+using Generator.PlugIn.SqlGenerator;
 
 namespace Generator.Gui
 {
     public partial class Form1 : Form
     {
-        protected SqlConnection connection = new SqlConnection();
+        private readonly List<LoadedPlugIn> _plugIns;
+        private readonly SqlConnection _connection = new SqlConnection();
 
-        public Form1()
+        public Form1(List<LoadedPlugIn> plugIns)
         {
+            _plugIns = plugIns;
             InitializeComponent();
         }
 
@@ -30,15 +33,15 @@ namespace Generator.Gui
 
         private void ConnectButton_Click(object sender, EventArgs e)
         {
-            if (connection.State != ConnectionState.Open)
+            if (_connection.State != ConnectionState.Open)
             {
                 try
                 {
-                    connection.ConnectionString = ProcessConnectionString(ConnectionString.Text);
-                    connection.Open();
+                    _connection.ConnectionString = ProcessConnectionString(ConnectionString.Text);
+                    _connection.Open();
 
 
-                    var schema = connection.GetSchema("Tables");
+                    var schema = _connection.GetSchema("Tables");
 
                     treeView.Nodes.Clear();
                     var tables = new Collection<string>();
@@ -51,7 +54,7 @@ namespace Generator.Gui
 
                         var restrictionsColumns = new string[4];
                         restrictionsColumns[2] = row[2].ToString();
-                        var schemaColumns = connection.GetSchema("Columns", restrictionsColumns);
+                        var schemaColumns = _connection.GetSchema("Columns", restrictionsColumns);
 
                         foreach (System.Data.DataRow rowColumn in schemaColumns.Rows)
                         {
@@ -90,11 +93,11 @@ namespace Generator.Gui
             }
             else
             {
-                connection.Close();
+                _connection.Close();
                 treeView.Nodes.Clear();
             }
 
-            if (connection.State == ConnectionState.Open)
+            if (_connection.State == ConnectionState.Open)
             {
                 StatusLabel.Text = "Connected";
                 ConnectButton.Text = "Disconnect";
@@ -148,9 +151,23 @@ namespace Generator.Gui
 
         private void button1_Click(object sender, EventArgs e)
         {
+            var usedPlugIn = _plugIns.FirstOrDefault(p => p.IsActive && p.IsSqlGenerator);
 
-            var g = new SqlGenerator.Generator();
+            if (usedPlugIn == null)
+            {
+                MessageBox.Show(
+                    "There is no active SQL generator!\r\nPlease install or activate it and try again!",
+                    "Sql Generator Missing",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                );
 
+                return;
+            }
+
+            var tables = new Collection<Table>();
+            var columns = new Collection<Column>();
+            var keyPairs = new Collection<KeyPair>();
 
             foreach (TreeNode node in treeView.Nodes)
             {
@@ -163,13 +180,13 @@ namespace Generator.Gui
                         continue;
 
                     used = true;
-                    g.Columns.Add(
+                    columns.Add(
                         new Column(c.Text, t, null)
                     );
                 }
 
                 if(used)
-                    g.Tables.Add(t);
+                    tables.Add(t);
             }
 
             foreach (Join control in flowLayoutPanel.Controls)
@@ -179,7 +196,7 @@ namespace Generator.Gui
 
                 var l = control.LeftSide.Text.Split(new string[] { "." }, 2, StringSplitOptions.RemoveEmptyEntries);
                 var r = control.RightSide.Text.Split(new string[] { "." }, 2, StringSplitOptions.RemoveEmptyEntries); 
-                g.KeyPairs.Add(
+                keyPairs.Add(
                     new KeyPair(
                         new Table(r[0]), 
                         l[1],
@@ -189,9 +206,23 @@ namespace Generator.Gui
                 );
             }
 
-            var modal = new ExportApp();
-            modal.Sql = g.ToString();
+
+
+            var modal = new ExportApp { Sql = usedPlugIn.SqlGenerator.GetSql(tables, columns, keyPairs) };
             modal.ShowDialog();
+        }
+
+        private void Form1_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void aboutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            using (var about = new AboutBox(_plugIns))
+            {
+                about.ShowDialog();
+            }
         }
     }
 }
