@@ -28,7 +28,7 @@ namespace Generator.PlugIn
                 var assembly = Assembly.LoadFrom(file);
                 var types = assembly.GetTypes().Where(AssemblyFilter).ToArray();
 
-                foreach (var type in types.Where(t => t.GetInterface("Generator.PlugIn.ISqlGenerator") != null))
+                foreach (var type in types)
                 {
                     PlugIns.Add(new LoadedPlugIn(assembly.CreateInstance(type.FullName), assembly.GetName()));
                 }
@@ -46,6 +46,9 @@ namespace Generator.PlugIn
             var interfaces = type.GetInterfaces();
 
             if (interfaces.Any(o => o.FullName == "Generator.PlugIn.ISqlGenerator"))
+                return true;
+
+            if (interfaces.Any(o => o.FullName == "Generator.PlugIn.IExporter"))
                 return true;
 
             return false;

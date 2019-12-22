@@ -5,11 +5,11 @@ using System.Runtime.InteropServices;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("Generator.Gui")]
+[assembly: AssemblyTitle("Generator.PlugIn.SqlFileExporter")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
-[assembly: AssemblyProduct("Generator.Gui")]
+[assembly: AssemblyProduct("Generator.PlugIn.SqlFileExporter")]
 [assembly: AssemblyCopyright("Copyright ©  2019")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
@@ -20,7 +20,7 @@ using System.Runtime.InteropServices;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("dfde494c-1a5f-46a6-890b-4b2b0d788aa7")]
+[assembly: Guid("ccce1d2c-1df5-45f6-a38b-a1f1cba19cd0")]
 
 // Version information for an assembly consists of the following four values:
 //

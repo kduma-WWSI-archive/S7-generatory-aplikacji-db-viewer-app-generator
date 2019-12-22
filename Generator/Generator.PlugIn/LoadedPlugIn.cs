@@ -22,6 +22,10 @@ namespace Generator.PlugIn
 
         public ISqlGenerator SqlGenerator { get { return _plugIn as ISqlGenerator; } }
 
+        public bool IsExporter { get { return _plugIn is IExporter; } }
+
+        public IExporter SqlExporter { get { return _plugIn as IExporter; } }
+
         public PluginAttribute Plugin { get{ return _plugIn.GetType().GetCustomAttributes(false).First(t => t is PluginAttribute) as PluginAttribute; } }
 
         public CompanyInfoAttribute CompanyInfo { get { return _plugIn.GetType().GetCustomAttributes(false).Where(t => t is CompanyInfoAttribute).Cast<CompanyInfoAttribute>().FirstOrDefault(); } }

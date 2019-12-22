@@ -112,6 +112,14 @@
       <Name>Generator.PlugIn.BaseSqlGenerator</Name>
       <Private>True</Private>
     </ProjectReference>
+    <ProjectReference Include="..\Generator.PlugIn.ExeFileExporter\Generator.PlugIn.ExeFileExporter.csproj">
+      <Project>{31B2922A-FFEF-4681-9658-8BBEF24C9137}</Project>
+      <Name>Generator.PlugIn.ExeFileExporter</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Generator.PlugIn.SqlFileExporter\Generator.PlugIn.SqlFileExporter.csproj">
+      <Project>{9E8A212B-1781-4ED5-9FC1-6D06B6B56B64}</Project>
+      <Name>Generator.PlugIn.SqlFileExporter</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Generator.PlugIn\Generator.PlugIn.csproj">
       <Project>{F1B8D800-EED0-433F-B5D9-727D83F5A8E1}</Project>
       <Name>Generator.PlugIn</Name>
